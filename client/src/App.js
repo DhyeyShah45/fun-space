@@ -15,6 +15,7 @@ function App() {
       <div className="bg-img">
         <Navbar />
         <Homepage />
+        {/* <MainContentView /> */}
       </div>
     </ThemeProvider>
   );
