@@ -47,21 +47,54 @@ const MainContent = () => {
               borderLeft: "1px solid black",
             }}
           >
-            <Tooltip title="Like">
-              <Button color="inherit">
-                <ThumbUpIcon fontSize="small"></ThumbUpIcon>
-              </Button>
-            </Tooltip>
-            <Tooltip title="Dislike">
-              <Button color="inherit">
-                <ThumbDownIcon fontSize="small"></ThumbDownIcon>
-              </Button>
-            </Tooltip>
-            <Tooltip title="Comment">
-              <Button color="inherit">
-                <CommentIcon fontSize="small"></CommentIcon>
-              </Button>
-            </Tooltip>
+            <Box alignItems="center">
+              <Box mt="20%">
+                <Tooltip title="Like">
+                  <Button color="inherit">
+                    <ThumbUpIcon fontSize="medium"></ThumbUpIcon>
+                  </Button>
+                </Tooltip>
+              </Box>
+              <Typography
+                fontSize="1rem"
+                fontFamily="Quicksand"
+                textAlign="center"
+              >
+                Likes:
+              </Typography>
+            </Box>
+            <Box alignItems="center">
+              <Box mt="20%">
+                <Tooltip title="Like">
+                  <Button color="inherit">
+                    <ThumbDownIcon fontSize="medium"></ThumbDownIcon>
+                  </Button>
+                </Tooltip>
+              </Box>
+              <Typography
+                fontSize="1rem"
+                fontFamily="Quicksand"
+                textAlign="center"
+              >
+                Dislikes:
+              </Typography>
+            </Box>
+            <Box alignItems="center">
+              <Box mt="15%">
+                <Tooltip title="Like">
+                  <Button color="inherit">
+                    <CommentIcon fontSize="medium"></CommentIcon>
+                  </Button>
+                </Tooltip>
+              </Box>
+              <Typography
+                fontSize="1rem"
+                fontFamily="Quicksand"
+                textAlign="center"
+              >
+                Comments:
+              </Typography>
+            </Box>
           </Box>
         </Box>
         <CardContent sx={{ borderTop: "1px solid black" }}>
@@ -75,22 +108,6 @@ const MainContent = () => {
               Tags
             </Typography>
           </CardContent>
-          <Box
-            display="flex"
-            marginLeft="auto"
-            width="20%"
-            justifyContent="center"
-            borderLeft="1px solid black"
-          >
-            <CardContent>
-              <Typography fontSize="1rem" fontFamily="Quicksand">
-                Likes Count
-              </Typography>
-              <Typography fontSize="1rem" fontFamily="Quicksand">
-                Dislikes Count
-              </Typography>
-            </CardContent>
-          </Box>
         </Box>
       </Card>
     </Box>

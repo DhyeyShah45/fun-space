@@ -18,13 +18,13 @@ const ViewComment = () => {
           opacity: "0.8",
         }}
       >
-        <Typography color="#eee" fontSize="1.5rem">
+        <Typography color="#eee" fontSize="2rem">
           Comments
         </Typography>
         <Card sx={{ borderRadius: "20px", mb: "5px" }}>
           <Box sx={{ display: "flex" }}>
             <CardContent>
-              <Typography fontSize="1rem" fontFamily="Quicksand">
+              <Typography fontSize="1.5rem" fontFamily="Quicksand">
                 Author
               </Typography>
             </CardContent>
@@ -35,7 +35,7 @@ const ViewComment = () => {
               }}
             >
               <CardContent>
-                <Typography fontSize="1rem" fontFamily="Quicksand">
+                <Typography fontSize="1.5rem" fontFamily="Quicksand">
                   Comment
                 </Typography>
               </CardContent>
@@ -49,16 +49,38 @@ const ViewComment = () => {
                 borderLeft: "1px solid black",
               }}
             >
-              <Tooltip title="Like">
-                <Button color="inherit">
-                  <ThumbUpIcon fontSize="small"></ThumbUpIcon>
-                </Button>
-              </Tooltip>
-              <Tooltip title="Dislike">
-                <Button color="inherit">
-                  <ThumbDownIcon fontSize="small"></ThumbDownIcon>
-                </Button>
-              </Tooltip>
+              <Box alignItems="center">
+                <Box mt="20%">
+                  <Tooltip title="Like">
+                    <Button color="inherit">
+                      <ThumbUpIcon fontSize="medium"></ThumbUpIcon>
+                    </Button>
+                  </Tooltip>
+                </Box>
+                <Typography
+                  fontSize="1rem"
+                  fontFamily="Quicksand"
+                  textAlign="center"
+                >
+                  Likes:
+                </Typography>
+              </Box>
+              <Box alignItems="center">
+                <Box mt="20%">
+                  <Tooltip title="Like">
+                    <Button color="inherit">
+                      <ThumbDownIcon fontSize="medium"></ThumbDownIcon>
+                    </Button>
+                  </Tooltip>
+                </Box>
+                <Typography
+                  fontSize="1rem"
+                  fontFamily="Quicksand"
+                  textAlign="center"
+                >
+                  Dislikes:
+                </Typography>
+              </Box>
             </Box>
           </Box>
         </Card>

@@ -1,7 +1,12 @@
 import SearchIcon from "@mui/icons-material/Search";
+import { Button } from "@mui/material";
 import InputBase from "@mui/material/InputBase";
 import Typography from "@mui/material/Typography";
 import { alpha, styled } from "@mui/material/styles";
+import jwt_decode from "jwt-decode";
+import { useEffect, useState } from "react";
+// https://youtu.be/roxC8SMs7HU - Google Authentication
+
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
   borderRadius: theme.shape.borderRadius,
@@ -43,6 +48,29 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 const Navbar = () => {
+  const [user, setUser] = useState({});
+  const handleCallbackResponse = (response) => {
+    const data = jwt_decode(response.credential);
+    setUser({ name: data.name, email: data.email, picture: data.picture });
+  };
+  const handleSignOut = () => {
+    setUser({});
+  };
+
+  useEffect(() => {
+    /* global google */
+    google.accounts.id.initialize({
+      client_id:
+        "711055178299-5k26umqpiqfkndjghnfhsn40ioledr2p.apps.googleusercontent.com",
+      callback: handleCallbackResponse,
+    });
+
+    google.accounts.id.renderButton(document.getElementById("signInDiv"), {
+      theme: "outline",
+      size: "large",
+    });
+  }, [user]);
+
   return (
     <div className="navbar">
       <Typography
@@ -52,16 +80,6 @@ const Navbar = () => {
       >
         Logo
       </Typography>
-
-      {/* <div className="search">
-        <Typography
-          variant="h4"
-          fontFamily="Quicksand"
-          sx={{ fontSize: "1.5rem" }}
-        >
-          Search Bar
-        </Typography>
-      </div> */}
 
       <Search>
         <SearchIconWrapper>
@@ -74,20 +92,18 @@ const Navbar = () => {
       </Search>
 
       <div className="links">
-        <Typography
-          variant="h4"
-          fontFamily="Quicksand"
-          sx={{ padding: "10px", fontSize: "1.5rem" }}
-        >
-          Login/Sign Up
-        </Typography>
-        {/* <Typography
-          variant="h4"
-          fontFamily="Quicksand"
-          sx={{ padding: "10px", fontSize: "1.5rem", mr: "10px" }}
-        >
-          Register
-        </Typography> */}
+        {Object.keys(user).length !== 0 ? (
+          <Button
+            variant="contained"
+            color="info"
+            onClick={handleSignOut}
+            sx={{ marginRight: "20px" }}
+          >
+            SignOut
+          </Button>
+        ) : (
+          <div id="signInDiv" style={{ marginRight: "20px" }}></div>
+        )}
       </div>
     </div>
   );
