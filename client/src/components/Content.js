@@ -20,6 +20,7 @@ const Content = () => {
           borderRadius: "20px",
           margin: "5px",
           textAlign: "left",
+          opacity: "0.8",
         }}
       >
         <CardContent>

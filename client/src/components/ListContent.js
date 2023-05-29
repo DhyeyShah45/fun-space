@@ -14,6 +14,7 @@ const ListContent = () => {
           borderRadius: "20px",
           marginBottom: "5px",
           textAlign: "center",
+          opacity: "0.8",
         }}
       >
         <CardContent>

@@ -8,6 +8,7 @@ const HomepageSideData = () => {
         backgroundColor: theme.palette.primary.main,
         borderRadius: "20px",
         textAlign: "center",
+        opacity: "0.8",
       }}
     >
       <CardContent>

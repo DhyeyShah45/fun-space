@@ -6,7 +6,6 @@ const Homepage = () => {
     <>
       <div className="homepage">
         <div className="list-content">
-          {" "}
           <ListContent />
         </div>
         <div className="site-data">

@@ -12,11 +12,11 @@ function App() {
   });
   return (
     <ThemeProvider theme={theme}>
-      <div className="bg-img">
-        <Navbar />
-        <Homepage />
-        {/* <MainContentView /> */}
-      </div>
+      <Navbar />
+      <Homepage />
+      {/* <MainContentView /> */}
+      {/* <AddThread /> */}
+      {/* <Dashboard /> */}
     </ThemeProvider>
   );
 }

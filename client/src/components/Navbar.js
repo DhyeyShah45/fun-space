@@ -79,15 +79,15 @@ const Navbar = () => {
           fontFamily="Quicksand"
           sx={{ padding: "10px", fontSize: "1.5rem" }}
         >
-          Login
+          Login/Sign Up
         </Typography>
-        <Typography
+        {/* <Typography
           variant="h4"
           fontFamily="Quicksand"
           sx={{ padding: "10px", fontSize: "1.5rem", mr: "10px" }}
         >
           Register
-        </Typography>
+        </Typography> */}
       </div>
     </div>
   );

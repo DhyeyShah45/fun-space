@@ -18,7 +18,7 @@ const ViewComment = () => {
           opacity: "0.8",
         }}
       >
-        <Typography color="#eee" fontSize="2rem">
+        <Typography color="#eee" fontSize="1.5rem">
           Comments
         </Typography>
         <Card sx={{ borderRadius: "20px", mb: "5px" }}>
