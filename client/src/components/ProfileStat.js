@@ -1,4 +1,11 @@
-import { Box, Card, CardContent, Typography, useTheme } from "@mui/material";
+import {
+  Box,
+  Button,
+  Card,
+  CardContent,
+  Typography,
+  useTheme,
+} from "@mui/material";
 
 const ProfileStat = () => {
   const theme = useTheme();
@@ -40,6 +47,9 @@ const ProfileStat = () => {
               <Typography fontFamily="Quicksand" fontSize="1rem">
                 No. of comments :
               </Typography>
+              <Button variant="contained" color="error" size="small">
+                Delete Account
+              </Button>
             </Box>
           </Box>
         </CardContent>
