@@ -72,20 +72,15 @@ const userLogin = async (req, res) => {
     SELECT $1,$2
     WHERE NOT EXISTS (
       SELECT 1 FROM users WHERE user_email = $2
-    )
-    RETURNING user_id;`,
+    );`,
       [name, email]
     );
-    if (id.rows.length === 0) {
-      const checkId = await pool.query(
-        `
-      SELECT user_id FROM users WHERE user_email = $1;`,
-        [email]
-      );
-      res.json(checkId.rows);
-    } else {
-      res.json(id.rows);
-    }
+    const checkId = await pool.query(
+      `
+      SELECT * FROM users WHERE user_email = $1;`,
+      [email]
+    );
+    res.json(checkId.rows);
   } catch (error) {
     console.error();
     res.status(500).json({ error: error.message });

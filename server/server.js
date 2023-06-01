@@ -10,7 +10,7 @@ const app = express();
 // Middleware
 app.use(
   cors({
-    origin: "https://blog-here.netlify.app",
+    origin: "http://localhost:3000",
   })
 );
 app.use(express.urlencoded({ extended: true }));

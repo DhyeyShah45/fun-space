@@ -4,7 +4,8 @@ import InputBase from "@mui/material/InputBase";
 import Typography from "@mui/material/Typography";
 import { alpha, styled } from "@mui/material/styles";
 import jwt_decode from "jwt-decode";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
+import { useLogin } from "../hooks/useLogin";
 // https://youtu.be/roxC8SMs7HU - Google Authentication
 
 const Search = styled("div")(({ theme }) => ({
@@ -48,16 +49,18 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 const Navbar = () => {
-  const [user, setUser] = useState({});
-  const handleCallbackResponse = (response) => {
-    const data = jwt_decode(response.credential);
-    setUser({ name: data.name, email: data.email, picture: data.picture });
-  };
+  const { login, loggedIn, setLoggedIn } = useLogin();
+
   const handleSignOut = () => {
-    setUser({});
+    setLoggedIn(false);
   };
 
   useEffect(() => {
+    const handleCallbackResponse = async (response) => {
+      const data = jwt_decode(response.credential);
+      await login(data.name, data.email);
+      // setUser({ name: data.name, email: data.email, picture: data.picture });
+    };
     /* global google */
     google.accounts.id.initialize({
       client_id:
@@ -69,7 +72,7 @@ const Navbar = () => {
       theme: "outline",
       size: "large",
     });
-  }, [user]);
+  }, [login]);
 
   return (
     <div className="navbar">
@@ -92,7 +95,7 @@ const Navbar = () => {
       </Search>
 
       <div className="links">
-        {Object.keys(user).length !== 0 ? (
+        {loggedIn ? (
           <Button
             variant="contained"
             color="info"
