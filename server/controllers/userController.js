@@ -17,7 +17,7 @@ const getUserThreads = async (req, res) => {
   try {
     const id = req.params.id;
     const response = await pool.query(
-      `SELECT thread_title,thread_description FROM threads WHERE thread_author = $1;`,
+      `SELECT thread_title,thread_description,thread_id FROM threads WHERE thread_author = $1;`,
       [id]
     );
     res.json(response.rows);
@@ -30,11 +30,14 @@ const getUserThreads = async (req, res) => {
 const getUserComments = async (req, res) => {
   try {
     const id = req.params.id;
+    // comment_des is renamed as thread_description for frontend data compatibilty
     const response = await pool.query(
-      `SELECT t.thread_title as title, array_agg(c.comment_des) as description
-      from threads t
-      inner join comments c on t.thread_id = c.comment_threadfor where c.comment_author = $1
-      group by t.thread_title;`,
+      `SELECT t.thread_id, t.thread_title, array_agg(c.comment_des) as thread_description
+      FROM threads t
+      INNER JOIN comments c ON t.thread_id = c.comment_threadfor
+      WHERE c.comment_author = $1
+      GROUP BY t.thread_id, t.thread_title;
+      `,
       [id]
     );
     res.json(response.rows);

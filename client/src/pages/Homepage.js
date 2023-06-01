@@ -14,7 +14,7 @@ const Homepage = () => {
     <>
       <div className="homepage">
         <div className="list-content">
-          <ListContent data={top5thread} />
+          <ListContent data={top5thread} heading={"Top Threads"} />
         </div>
         <div className="site-data">
           <HomepageSideData data={metrics} />

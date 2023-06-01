@@ -1,9 +1,7 @@
-import { useState } from "react";
 import { useUserContext } from "../userContext";
 export const useLogin = () => {
   const { user, setUser } = useUserContext();
-  const [loggedIn, setLoggedIn] = useState(false);
-  const login = async (name, email) => {
+  const login = async (name, email, picture) => {
     try {
       const response = await fetch("http://localhost:5000/user/login", {
         method: "POST",
@@ -14,11 +12,10 @@ export const useLogin = () => {
         body: JSON.stringify({ name, email }),
       });
       const data = await response.json();
-      setUser({ ...user, ...data[0] });
-      setLoggedIn(true);
+      setUser({ ...user, ...data[0], isLoggedIn: true, image: picture });
     } catch (error) {
       console.error(error);
     }
   };
-  return { login, loggedIn, setLoggedIn };
+  return { login };
 };

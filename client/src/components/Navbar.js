@@ -5,7 +5,9 @@ import Typography from "@mui/material/Typography";
 import { alpha, styled } from "@mui/material/styles";
 import jwt_decode from "jwt-decode";
 import { useEffect } from "react";
+import { Link } from "react-router-dom";
 import { useLogin } from "../hooks/useLogin";
+import { useUserContext } from "../userContext";
 // https://youtu.be/roxC8SMs7HU - Google Authentication
 
 const Search = styled("div")(({ theme }) => ({
@@ -49,16 +51,17 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 const Navbar = () => {
-  const { login, loggedIn, setLoggedIn } = useLogin();
+  const { login } = useLogin();
+  const { user, setUser } = useUserContext();
 
   const handleSignOut = () => {
-    setLoggedIn(false);
+    setUser({ ...user, isLoggedIn: false });
   };
 
   useEffect(() => {
     const handleCallbackResponse = async (response) => {
       const data = jwt_decode(response.credential);
-      await login(data.name, data.email);
+      await login(data.name, data.email, data.picture);
       // setUser({ name: data.name, email: data.email, picture: data.picture });
     };
     /* global google */
@@ -72,18 +75,19 @@ const Navbar = () => {
       theme: "outline",
       size: "large",
     });
-  }, [login]);
+  }, [user.isLoggedIn]);
 
   return (
     <div className="navbar">
-      <Typography
-        variant="h4"
-        fontFamily="Quicksand"
-        sx={{ fontSize: "1.5rem", padding: "10px", ml: "20px" }}
-      >
-        Logo
-      </Typography>
-
+      <Link to="/" style={{ textDecoration: "none" }}>
+        <Typography
+          variant="h4"
+          fontFamily="Quicksand"
+          sx={{ fontSize: "1.5rem", padding: "10px", ml: "20px" }}
+        >
+          Logo
+        </Typography>
+      </Link>
       <Search>
         <SearchIconWrapper>
           <SearchIcon />
@@ -95,15 +99,35 @@ const Navbar = () => {
       </Search>
 
       <div className="links">
-        {loggedIn ? (
-          <Button
-            variant="contained"
-            color="info"
-            onClick={handleSignOut}
-            sx={{ marginRight: "20px" }}
-          >
-            SignOut
-          </Button>
+        {user.isLoggedIn ? (
+          <>
+            <Link to="/addThread">
+              <Button
+                variant="contained"
+                color="info"
+                sx={{ marginRight: "20px" }}
+              >
+                Add Thread
+              </Button>
+            </Link>
+            <Link to="/dashboard">
+              <Button
+                variant="contained"
+                color="info"
+                sx={{ marginRight: "20px" }}
+              >
+                Dashboard
+              </Button>
+            </Link>
+            <Button
+              variant="contained"
+              color="info"
+              onClick={handleSignOut}
+              sx={{ marginRight: "20px" }}
+            >
+              Sign Out
+            </Button>
+          </>
         ) : (
           <div id="signInDiv" style={{ marginRight: "20px" }}></div>
         )}

@@ -7,6 +7,12 @@ import {
 } from "@mui/material";
 
 const Content = ({ data }) => {
+  let joinedDescription = "";
+  if (Array.isArray(data.thread_description)) {
+    joinedDescription = data.thread_description.join(" | ");
+  } else {
+    joinedDescription = data.thread_description;
+  }
   const handleClick = () => {
     console.log("clicked");
   };
@@ -28,9 +34,13 @@ const Content = ({ data }) => {
             {data.thread_title}
           </Typography>
         </CardContent>
-        <CardContent>
-          <Typography color="textSecondary">
-            {data.thread_description}
+        <CardContent sx={{ pt: 0 }}>
+          <Typography
+            color="textSecondary"
+            variant="inherit"
+            fontSize="1.15rem"
+          >
+            {joinedDescription}
           </Typography>
         </CardContent>
       </Card>
