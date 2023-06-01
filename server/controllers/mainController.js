@@ -6,7 +6,7 @@ const getStat = async (req, res) => {
     (SELECT COUNT(*) FROM users) AS users_count,
     (SELECT COUNT(*) FROM threads) AS threads_count,
     (SELECT COUNT(*) FROM comments) AS comments_count;`);
-    res.json(response.rows);
+    res.json(response.rows[0]);
   } catch (error) {
     console.error();
     res.status(500).json({ error: error.message });

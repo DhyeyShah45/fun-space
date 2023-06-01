@@ -1,6 +1,6 @@
 import { Card, CardContent, Typography, useTheme } from "@mui/material";
 
-const HomepageSideData = () => {
+const HomepageSideData = ({ data }) => {
   const theme = useTheme();
   return (
     <Card
@@ -15,9 +15,15 @@ const HomepageSideData = () => {
         <Typography variant="h5" component="h2">
           Site Statistics
         </Typography>
-        <Typography color="textSecondary">Number of Threads</Typography>
-        <Typography color="textSecondary">Number of Comments</Typography>
-        <Typography color="textSecondary">Number of Users</Typography>
+        <Typography color="textSecondary">
+          Number of Threads : {data && data.threads_count}
+        </Typography>
+        <Typography color="textSecondary">
+          Number of Comments :{data && data.comments_count}
+        </Typography>
+        <Typography color="textSecondary">
+          Number of Users : {data && data.users_count}
+        </Typography>
       </CardContent>
     </Card>
   );

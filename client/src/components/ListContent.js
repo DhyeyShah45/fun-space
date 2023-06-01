@@ -1,7 +1,7 @@
 import { Card, CardContent, Typography, useTheme } from "@mui/material";
-import Content from "./Content";
+import Content from "../components/Content";
 
-const ListContent = () => {
+const ListContent = ({ data }) => {
   const theme = useTheme();
 
   return (
@@ -23,9 +23,10 @@ const ListContent = () => {
           </Typography>
         </CardContent>
       </Card>
-      <Content />
-      <Content />
-      <Content />
+      {/* {console.log(data.length)} */}
+      {data.length &&
+        data.map((thread) => <Content data={thread} key={thread.thread_id} />)}
+
       {/* <Content /> */}
     </>
   );
