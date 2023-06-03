@@ -5,8 +5,9 @@ import {
   Typography,
   useTheme,
 } from "@mui/material";
-
+import { useNavigate } from "react-router-dom";
 const Content = ({ data }) => {
+  const navigate = useNavigate();
   let joinedDescription = "";
   if (Array.isArray(data.thread_description)) {
     joinedDescription = data.thread_description.join(" | ");
@@ -14,7 +15,7 @@ const Content = ({ data }) => {
     joinedDescription = data.thread_description;
   }
   const handleClick = () => {
-    console.log("clicked");
+    navigate(`/view/thread/${data.thread_id}`);
   };
   const theme = useTheme();
   return (

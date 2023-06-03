@@ -1,4 +1,3 @@
-import CommentIcon from "@mui/icons-material/Comment";
 import ThumbDownIcon from "@mui/icons-material/ThumbDown";
 import ThumbUpIcon from "@mui/icons-material/ThumbUp";
 import {
@@ -10,7 +9,8 @@ import {
   Typography,
 } from "@mui/material";
 
-const MainContent = () => {
+const MainContent = ({ data }) => {
+  const ok = Object.keys(data).length !== 0;
   return (
     <Box
       sx={{
@@ -21,9 +21,9 @@ const MainContent = () => {
     >
       <Card sx={{ borderRadius: "20px", mb: "5px" }}>
         <Box sx={{ display: "flex" }}>
-          <CardContent>
-            <Typography fontSize="1.5rem" fontFamily="Quicksand">
-              Author
+          <CardContent sx={{ alignItems: "center" }}>
+            <Typography fontSize="1.25rem" fontFamily="Quicksand">
+              Author: {ok && data.user_name}
             </Typography>
           </CardContent>
           <Box
@@ -33,8 +33,8 @@ const MainContent = () => {
             }}
           >
             <CardContent>
-              <Typography fontSize="1.5rem" fontFamily="Quicksand">
-                Title
+              <Typography fontSize="1.25rem" fontFamily="Quicksand">
+                Title: {ok && data.thread_title}
               </Typography>
             </CardContent>
           </Box>
@@ -60,7 +60,7 @@ const MainContent = () => {
                 fontFamily="Quicksand"
                 textAlign="center"
               >
-                Likes:
+                Likes: {ok && data.thread_likedby.length}
               </Typography>
             </Box>
             <Box alignItems="center">
@@ -76,36 +76,20 @@ const MainContent = () => {
                 fontFamily="Quicksand"
                 textAlign="center"
               >
-                Dislikes:
-              </Typography>
-            </Box>
-            <Box alignItems="center">
-              <Box mt="15%">
-                <Tooltip title="Like">
-                  <Button color="inherit">
-                    <CommentIcon fontSize="medium"></CommentIcon>
-                  </Button>
-                </Tooltip>
-              </Box>
-              <Typography
-                fontSize="1rem"
-                fontFamily="Quicksand"
-                textAlign="center"
-              >
-                Comments:
+                Dislikes: {ok && data.thread_dislikedby.length}
               </Typography>
             </Box>
           </Box>
         </Box>
         <CardContent sx={{ borderTop: "1px solid black" }}>
           <Typography fontSize="1rem" fontFamily="Quicksand">
-            Description
+            Description: {ok && data.thread_description}
           </Typography>
         </CardContent>
         <Box display="flex" borderTop="1px solid black">
           <CardContent>
             <Typography fontSize="1rem" fontFamily="Quicksand">
-              Tags
+              Tags: {ok && data.thread_tags.join(", ")}
             </Typography>
           </CardContent>
         </Box>

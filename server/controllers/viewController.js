@@ -13,7 +13,7 @@ const postThread = async (req, res) => {
     res.json(response.rows);
   } catch (error) {
     console.error();
-    res.status(500).json({ mesage: error.message });
+    res.status(500).json({ message: error.message });
   }
 };
 const postComment = async (req, res) => {
@@ -29,7 +29,7 @@ const postComment = async (req, res) => {
     res.json(response.rows);
   } catch (error) {
     console.error();
-    res.status(500).json({ mesage: error.message });
+    res.status(500).json({ message: error.message });
   }
 };
 const putThread = async (req, res) => {
@@ -60,11 +60,11 @@ const putThread = async (req, res) => {
       // console.log(response);
       res.json(response.rows);
     } else {
-      res.json({ mesage: "You can't edit because you're not the owner!" });
+      res.json({ message: "You can't edit because you're not the owner!" });
     }
   } catch (error) {
     console.error();
-    res.status(500).json({ mesage: error.mesage });
+    res.status(500).json({ message: error.mesage });
   }
 };
 const putComment = async (req, res) => {
@@ -87,7 +87,7 @@ const putComment = async (req, res) => {
     );
     res.json(response.rows);
   } else {
-    res.json({ mesage: "You can't edit because you're not the owner!" });
+    res.json({ message: "You can't edit because you're not the owner!" });
   }
 };
 const delThread = async (req, res) => {
@@ -100,7 +100,7 @@ const delThread = async (req, res) => {
     res.json(response.rows);
   } catch (error) {
     console.error();
-    res.status(500).json({ mesage: error.mesage });
+    res.status(500).json({ message: error.mesage });
   }
 };
 const delComment = async (req, res) => {
@@ -113,7 +113,41 @@ const delComment = async (req, res) => {
     res.json(response.rows);
   } catch (error) {
     console.error();
-    res.status(500).json({ mesage: error.mesage });
+    res.status(500).json({ message: error.mesage });
+  }
+};
+const getThread = async (req, res) => {
+  try {
+    const tid = req.params.tid;
+    const response = await pool.query(
+      `SELECT t.*, u.user_name
+    FROM threads AS t
+    INNER JOIN users AS u ON t.thread_author = u.user_id
+    WHERE t.thread_id = $1;
+    `,
+      [tid]
+    );
+    res.json(response.rows[0]);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: error.mesage });
+  }
+};
+const getComment = async (req, res) => {
+  try {
+    const tid = req.params.tid;
+    const response = await pool.query(
+      `SELECT c.*, u.user_name
+      FROM comments AS c
+      INNER JOIN users AS u ON c.comment_author = u.user_id
+      WHERE c.comment_threadfor = $1;
+    `,
+      [tid]
+    );
+    res.json(response.rows);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: error.mesage });
   }
 };
 
@@ -124,4 +158,6 @@ module.exports = {
   putComment,
   delThread,
   delComment,
+  getThread,
+  getComment,
 };

@@ -7,9 +7,22 @@ import {
   Typography,
   useTheme,
 } from "@mui/material";
+import { useState } from "react";
+import { useAction } from "../hooks/useAction";
 
 const AddThread = () => {
   const theme = useTheme();
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+  const [tags, setTags] = useState("");
+  const { postThread } = useAction();
+  const isOk = title !== "" && description !== "" && tags !== "";
+  const handlePostThread = () => {
+    postThread(title, description, tags.split(","));
+    setTitle("");
+    setDescription("");
+    setTags("");
+  };
   return (
     <Box width="80%" margin="auto">
       <Typography color="#eee" fontSize="2rem" fontFamily="Quicksand">
@@ -25,10 +38,29 @@ const AddThread = () => {
         <CardContent>
           <Box display="flex" justifyContent="center">
             <Box width="70%" margin={1} display="flex" alignItems="center">
-              <TextField label="Title" variant="outlined" fullWidth />
+              <TextField
+                label="Title"
+                variant="outlined"
+                fullWidth
+                required
+                value={title}
+                onChange={(e) => {
+                  setTitle(e.target.value);
+                }}
+              />
             </Box>
             <Box width="30%" margin={1}>
-              <TextField label="Tags" variant="outlined" fullWidth />
+              <TextField
+                label="Tags"
+                placeholder="use commas to separate"
+                variant="outlined"
+                required
+                fullWidth
+                value={tags}
+                onChange={(e) => {
+                  setTags(e.target.value);
+                }}
+              />
             </Box>
           </Box>
           <Box display="flex" justifyContent="center">
@@ -37,6 +69,11 @@ const AddThread = () => {
                 label="Description"
                 variant="outlined"
                 fullWidth
+                required
+                value={description}
+                onChange={(e) => {
+                  setDescription(e.target.value);
+                }}
                 multiline
                 inputProps={{ style: { resize: "vertical" } }}
               />
@@ -48,7 +85,13 @@ const AddThread = () => {
               alignItems="center"
               justifyContent="center"
             >
-              <Button variant="contained" color="info" sx={{ width: "90%" }}>
+              <Button
+                variant="contained"
+                color="info"
+                disabled={!isOk}
+                sx={{ width: "90%" }}
+                onClick={handlePostThread}
+              >
                 Post
               </Button>
             </Box>

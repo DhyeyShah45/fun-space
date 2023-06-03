@@ -1,12 +1,14 @@
 import { useState } from "react";
 import { useUserContext } from "../userContext";
 export const useFetch = () => {
-  const { user, setUser } = useUserContext();
+  const { user } = useUserContext();
   const [top5thread, setTop5Thread] = useState({});
   const [metrics, setMetrics] = useState();
   const [profMetrics, setProfMetric] = useState();
   const [profThreads, setProfThreads] = useState({});
   const [profComments, setProfComments] = useState({});
+  const [mainThread, setMainThread] = useState({});
+  const [comments, setComments] = useState([]);
   const top5 = async () => {
     try {
       const response = await fetch("http://localhost:5000/main/top5", {
@@ -88,6 +90,40 @@ export const useFetch = () => {
       console.error(error);
     }
   };
+  const getThread = async (id) => {
+    try {
+      const response = await fetch(
+        `http://localhost:5000/view/view/thread/${id}`,
+        {
+          method: "GET",
+          headers: {
+            Accept: "application/json",
+          },
+        }
+      );
+      const data = await response.json();
+      setMainThread(data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  const getComments = async (id) => {
+    try {
+      const response = await fetch(
+        `http://localhost:5000/view/view/comments/${id}`,
+        {
+          method: "GET",
+          headers: {
+            Accept: "application/json",
+          },
+        }
+      );
+      const data = await response.json();
+      setComments(data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
   return {
     top5,
     top5thread,
@@ -99,5 +135,9 @@ export const useFetch = () => {
     profThreads,
     profileComments,
     profComments,
+    getThread,
+    mainThread,
+    getComments,
+    comments,
   };
 };

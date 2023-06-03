@@ -9,6 +9,7 @@ import Navbar from "./components/Navbar";
 import AddThread from "./pages/AddThread";
 import Dashboard from "./pages/Dashboard";
 import Homepage from "./pages/Homepage";
+import MainContentView from "./pages/MainContentView";
 import { useUserContext } from "./userContext";
 
 function App() {
@@ -40,6 +41,7 @@ function App() {
               user.isLoggedIn ? <Dashboard /> : <Navigate to="/"></Navigate>
             }
           />
+          <Route exact path="/view/thread/:id" element={<MainContentView />} />
         </Routes>
       </ThemeProvider>
     </Router>
