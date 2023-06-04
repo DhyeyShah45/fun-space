@@ -67,29 +67,6 @@ const putThread = async (req, res) => {
     res.status(500).json({ message: error.mesage });
   }
 };
-const putComment = async (req, res) => {
-  const des = req.body.des;
-  const uid = req.params.uid;
-  const tid = req.params.tid;
-  const check = await pool.query(
-    `SELECT EXISTS (
-    SELECT 1 FROM comments WHERE comment_author = $1 AND comment_id = $2
-  )AS you_can_edit;`,
-    [uid, tid]
-  );
-  if (check.rows[0].you_can_edit) {
-    const response = await pool.query(
-      `
-    update comments
-      set comment_des = $1
-    where comment_id = $2; `,
-      [des, tid]
-    );
-    res.json(response.rows);
-  } else {
-    res.json({ message: "You can't edit because you're not the owner!" });
-  }
-};
 const delThread = async (req, res) => {
   try {
     const tid = req.params.tid;
@@ -155,7 +132,7 @@ module.exports = {
   postThread,
   postComment,
   putThread,
-  putComment,
+
   delThread,
   delComment,
   getThread,

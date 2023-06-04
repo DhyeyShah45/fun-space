@@ -1,6 +1,6 @@
 import { Box, Typography } from "@mui/material";
 import Comment from "./Comment";
-const ViewComment = ({ data }) => {
+const ViewComment = ({ data, setHasChanged, hasChanged }) => {
   return (
     <>
       <Box
@@ -14,7 +14,12 @@ const ViewComment = ({ data }) => {
           Comments - {data.length}
         </Typography>
         {data.map((comment) => (
-          <Comment data={comment} key={comment.comment_id} />
+          <Comment
+            data={comment}
+            key={comment.comment_id}
+            setHasChanged={setHasChanged}
+            hasChanged={hasChanged}
+          />
         ))}
       </Box>
     </>

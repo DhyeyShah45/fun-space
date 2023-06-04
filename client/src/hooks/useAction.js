@@ -2,6 +2,7 @@ import { useUserContext } from "../userContext";
 
 export const useAction = () => {
   const { user } = useUserContext();
+
   const postThread = async (title, description, tags) => {
     const respomse = await fetch(
       `http://localhost:5000/view/add/thread/${user.user_id}`,
@@ -17,5 +18,153 @@ export const useAction = () => {
     const data = await respomse.json();
     console.log(data.message);
   };
-  return { postThread };
+  const postComment = async (description, uid, tid) => {
+    try {
+      const response = await fetch(
+        `http://localhost:5000/view/add/comment/${uid}/${tid}`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+          },
+          body: JSON.stringify({ description }),
+        }
+      );
+      const data = await response.json();
+      console.log(data.message);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  const delComment = async (id) => {
+    try {
+      const respomse = await fetch(
+        `http://localhost:5000/view/delete/comment/${id}`,
+        {
+          method: "DELETE",
+        }
+      );
+      const data = await respomse.json();
+      console.log(data.message);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  const postLikeThread = async (uid, tid) => {
+    try {
+      const response = await fetch(
+        `http://localhost:5000/action/like/thread/${uid}/${tid}`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+          },
+        }
+      );
+      const data = await response.json();
+      console.log(data.message);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  const postDislikeThread = async (uid, tid) => {
+    try {
+      const response = await fetch(
+        `http://localhost:5000/action/dislike/thread/${uid}/${tid}`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+          },
+        }
+      );
+      const data = await response.json();
+      console.log(data.message);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  const postLikeComment = async (uid, tid) => {
+    try {
+      const response = await fetch(
+        `http://localhost:5000/action/like/comment/${uid}/${tid}`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+          },
+        }
+      );
+      const data = await response.json();
+      console.log(data.message);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  const postDislikeComment = async (uid, tid) => {
+    try {
+      const response = await fetch(
+        `http://localhost:5000/action/dislike/comment/${uid}/${tid}`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+          },
+        }
+      );
+      const data = await response.json();
+      console.log(data.message);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  const putThread = async (title, description, tags, uid, tid) => {
+    try {
+      const respomse = await fetch(
+        `http://localhost:5000/view/update/thread/${uid}/${tid}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+          },
+          body: JSON.stringify({ title, description, tags }),
+        }
+      );
+      const data = await respomse.json();
+      console.log(data.message);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  const delThread = async (id) => {
+    try {
+      const respomse = await fetch(
+        `http://localhost:5000/view/delete/thread/${id}`,
+        {
+          method: "DELETE",
+        }
+      );
+      const data = await respomse.json();
+      console.log(data.message);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  return {
+    postThread,
+    postComment,
+    delComment,
+    postLikeThread,
+    postDislikeThread,
+    postLikeComment,
+    postDislikeComment,
+    delThread,
+    putThread,
+  };
 };
