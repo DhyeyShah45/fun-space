@@ -4,8 +4,9 @@ import InputBase from "@mui/material/InputBase";
 import Typography from "@mui/material/Typography";
 import { alpha, styled } from "@mui/material/styles";
 import jwt_decode from "jwt-decode";
-import { useEffect } from "react";
-import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useFetch } from "../hooks/useFetch";
 import { useLogin } from "../hooks/useLogin";
 import { useUserContext } from "../userContext";
 // https://youtu.be/roxC8SMs7HU - Google Authentication
@@ -53,6 +54,16 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 const Navbar = () => {
   const { login } = useLogin();
   const { user, setUser } = useUserContext();
+  const { getAllThreads, getSearch } = useFetch();
+  const [search, setSearch] = useState("");
+  const navigate = useNavigate();
+
+  const handleViewAll = () => {
+    getAllThreads();
+    setTimeout(() => {
+      navigate("/view/all");
+    }, 1000);
+  };
 
   const handleSignOut = () => {
     setUser({ ...user, isLoggedIn: false });
@@ -77,6 +88,12 @@ const Navbar = () => {
     });
   }, [user.isLoggedIn]);
 
+  const handleEnter = (event) => {
+    if (event.key === "Enter") {
+      getSearch();
+    }
+  };
+
   return (
     <div className="navbar">
       <Link to="/" style={{ textDecoration: "none" }}>
@@ -95,10 +112,21 @@ const Navbar = () => {
         <StyledInputBase
           placeholder="Search…"
           inputProps={{ "aria-label": "search" }}
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+          onKeyDown={handleEnter}
         />
       </Search>
-
+      {console.log(search)}
       <div className="links">
+        <Button
+          variant="contained"
+          color="info"
+          sx={{ marginRight: "20px" }}
+          onClick={handleViewAll}
+        >
+          View All
+        </Button>
         {user.isLoggedIn ? (
           <>
             <Link to="/addThread">

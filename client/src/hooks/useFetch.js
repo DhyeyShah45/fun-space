@@ -9,6 +9,7 @@ export const useFetch = () => {
   const [profComments, setProfComments] = useState({});
   const [mainThread, setMainThread] = useState({});
   const [comments, setComments] = useState([]);
+  const [allThreads, setAllThreads] = useState([]);
   const top5 = async () => {
     try {
       const response = await fetch("http://localhost:5000/main/top5", {
@@ -124,11 +125,44 @@ export const useFetch = () => {
       console.error(error);
     }
   };
+  const getAllThreads = async () => {
+    try {
+      const response = await fetch(`http://localhost:5000/main/all`, {
+        method: "GET",
+        headers: {
+          Accept: "application/json",
+        },
+      });
+      const data = await response.json();
+      setAllThreads(data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  const getSearch = async (search) => {
+    try {
+      const response = await fetch(`http://localhost:5000/main/search`, {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+        },
+        body: JSON.stringify({ search }),
+      });
+      const data = await response.json();
+      setAllThreads(data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   return {
     top5,
     top5thread,
     stat,
     metrics,
+    getAllThreads,
+    allThreads,
+    getSearch,
     profileDetails,
     profMetrics,
     profileThreads,

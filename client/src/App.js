@@ -10,6 +10,7 @@ import AddThread from "./pages/AddThread";
 import Dashboard from "./pages/Dashboard";
 import Homepage from "./pages/Homepage";
 import MainContentView from "./pages/MainContentView";
+import View from "./pages/View";
 import { useUserContext } from "./userContext";
 
 function App() {
@@ -42,6 +43,7 @@ function App() {
             }
           />
           <Route exact path="/view/thread/:id" element={<MainContentView />} />
+          <Route exact path="/view/all" element={<View />} />
         </Routes>
       </ThemeProvider>
     </Router>
