@@ -42,7 +42,7 @@ const Comment = ({ data, setHasChanged, hasChanged }) => {
   return (
     <Card sx={{ borderRadius: "20px", mb: "5px" }}>
       <Box sx={{ display: "flex" }}>
-        <CardContent>
+        <CardContent sx={{ width: "10%" }}>
           <Typography fontSize="1.5rem" fontFamily="Quicksand">
             By: {data.user_name}
           </Typography>

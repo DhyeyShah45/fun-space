@@ -5,7 +5,7 @@ import ListContent from "../components/ListContent";
 const View = ({ allThreads }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [dataThreads, setDataThreads] = useState([]);
-  const itemsPerPage = 3; // Number of items to display per page
+  const itemsPerPage = 5; // Number of items to display per page
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
 

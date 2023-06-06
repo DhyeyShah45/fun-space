@@ -106,9 +106,14 @@ const Navbar = ({ setAllThreads }) => {
         <Typography
           variant="h4"
           fontFamily="Quicksand"
-          sx={{ fontSize: "1.5rem", padding: "10px", ml: "20px" }}
+          sx={{
+            fontSize: "2rem",
+            padding: "10px",
+            ml: "20px",
+            fontWeight: "700",
+          }}
         >
-          Logo
+          YAY!
         </Typography>
       </Link>
       <Search>
