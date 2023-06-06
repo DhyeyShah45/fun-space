@@ -29,7 +29,7 @@ const View = ({ allThreads }) => {
 
   return (
     <Box sx={{ width: "80%", margin: "auto" }}>
-      <ListContent data={dataThreads} heading={"All Threads"}></ListContent>;
+      <ListContent data={dataThreads} heading={"Threads"}></ListContent>;
       <Box
         sx={{
           margin: "auto",
