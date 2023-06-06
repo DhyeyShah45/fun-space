@@ -18,7 +18,7 @@ const getTop5 = async (req, res) => {
     const response =
       await pool.query(`SELECT thread_title, thread_description,thread_id
       FROM threads
-      ORDER BY array_length(thread_likedBy, 1),array_length(thread_tags, 1) DESC NULLS LAST 
+      ORDER BY thread_createdOn DESC NULLS LAST 
       LIMIT 5
       ;
     `);

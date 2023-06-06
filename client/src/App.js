@@ -27,7 +27,7 @@ function App() {
   return (
     <Router>
       <ThemeProvider theme={theme}>
-        <Navbar allThreads={allThreads} setAllThreads={setAllThreads} />
+        <Navbar setAllThreads={setAllThreads} />
         <Routes>
           <Route exact path="/" element={<Homepage />} />
           <Route

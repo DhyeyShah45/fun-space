@@ -8,10 +8,12 @@ import {
   useTheme,
 } from "@mui/material";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useAction } from "../hooks/useAction";
 
 const AddThread = () => {
   const theme = useTheme();
+  const navigate = useNavigate();
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [tags, setTags] = useState("");
@@ -22,6 +24,7 @@ const AddThread = () => {
     setTitle("");
     setDescription("");
     setTags("");
+    navigate("/");
   };
   return (
     <Box width="80%" margin="auto">
