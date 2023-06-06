@@ -93,6 +93,10 @@ const Navbar = ({ setAllThreads }) => {
     if (event.key === "Enter") {
       const value = await getSearch(search);
       setAllThreads(value);
+      setTimeout(() => {
+        setSearch("");
+        navigate("/view/all");
+      }, 1000);
     }
   };
 
