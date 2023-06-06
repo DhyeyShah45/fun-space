@@ -5,6 +5,7 @@ const mainRoutes = require("./routes/mainRoutes");
 const userRoutes = require("./routes/userRoutes");
 const actionRoutes = require("./routes/actionRoutes");
 const viewRoutes = require("./routes/viewRoutes");
+
 const app = express();
 
 // Middleware

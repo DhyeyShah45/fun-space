@@ -9,7 +9,7 @@ const Homepage = () => {
   useEffect(() => {
     top5();
     stat();
-  }, [top5thread]);
+  }, []);
   return (
     <>
       <div className="homepage">
