@@ -17,7 +17,7 @@ const ProfileStat = ({ data }) => {
   const handleDelete = async () => {
     try {
       const response = await fetch(
-        `http://localhost:5000/user/del/${user.user_id}`,
+        `https://funspace-server.onrender.com/user/del/${user.user_id}`,
         {
           method: "DELETE",
           headers: {

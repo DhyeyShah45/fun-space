@@ -5,7 +5,7 @@ export const useAction = () => {
 
   const postThread = async (title, description, tags) => {
     const respomse = await fetch(
-      `http://localhost:5000/view/add/thread/${user.user_id}`,
+      `https://funspace-server.onrender.com/view/add/thread/${user.user_id}`,
       {
         method: "POST",
         headers: {
@@ -21,7 +21,7 @@ export const useAction = () => {
   const postComment = async (description, uid, tid) => {
     try {
       const response = await fetch(
-        `http://localhost:5000/view/add/comment/${uid}/${tid}`,
+        `https://funspace-server.onrender.com/view/add/comment/${uid}/${tid}`,
         {
           method: "POST",
           headers: {
@@ -40,7 +40,7 @@ export const useAction = () => {
   const delComment = async (id) => {
     try {
       const respomse = await fetch(
-        `http://localhost:5000/view/delete/comment/${id}`,
+        `https://funspace-server.onrender.com/view/delete/comment/${id}`,
         {
           method: "DELETE",
         }
@@ -54,7 +54,7 @@ export const useAction = () => {
   const postLikeThread = async (uid, tid) => {
     try {
       const response = await fetch(
-        `http://localhost:5000/action/like/thread/${uid}/${tid}`,
+        `https://funspace-server.onrender.com/action/like/thread/${uid}/${tid}`,
         {
           method: "POST",
           headers: {
@@ -72,7 +72,7 @@ export const useAction = () => {
   const postDislikeThread = async (uid, tid) => {
     try {
       const response = await fetch(
-        `http://localhost:5000/action/dislike/thread/${uid}/${tid}`,
+        `https://funspace-server.onrender.com/action/dislike/thread/${uid}/${tid}`,
         {
           method: "POST",
           headers: {
@@ -90,7 +90,7 @@ export const useAction = () => {
   const postLikeComment = async (uid, tid) => {
     try {
       const response = await fetch(
-        `http://localhost:5000/action/like/comment/${uid}/${tid}`,
+        `https://funspace-server.onrender.com/action/like/comment/${uid}/${tid}`,
         {
           method: "POST",
           headers: {
@@ -108,7 +108,7 @@ export const useAction = () => {
   const postDislikeComment = async (uid, tid) => {
     try {
       const response = await fetch(
-        `http://localhost:5000/action/dislike/comment/${uid}/${tid}`,
+        `https://funspace-server.onrender.com/action/dislike/comment/${uid}/${tid}`,
         {
           method: "POST",
           headers: {
@@ -126,7 +126,7 @@ export const useAction = () => {
   const putThread = async (title, description, tags, uid, tid) => {
     try {
       const respomse = await fetch(
-        `http://localhost:5000/view/update/thread/${uid}/${tid}`,
+        `https://funspace-server.onrender.com/view/update/thread/${uid}/${tid}`,
         {
           method: "PUT",
           headers: {
@@ -145,7 +145,7 @@ export const useAction = () => {
   const delThread = async (id) => {
     try {
       const respomse = await fetch(
-        `http://localhost:5000/view/delete/thread/${id}`,
+        `https://funspace-server.onrender.com/view/delete/thread/${id}`,
         {
           method: "DELETE",
         }

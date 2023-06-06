@@ -13,12 +13,15 @@ export const useFetch = () => {
 
   const top5 = async () => {
     try {
-      const response = await fetch("http://localhost:5000/main/top5", {
-        method: "GET",
-        headers: {
-          Accept: "application/json",
-        },
-      });
+      const response = await fetch(
+        "https://funspace-server.onrender.com/main/top5",
+        {
+          method: "GET",
+          headers: {
+            Accept: "application/json",
+          },
+        }
+      );
       const data = await response.json();
       setTop5Thread(data);
     } catch (error) {
@@ -27,12 +30,15 @@ export const useFetch = () => {
   };
   const stat = async () => {
     try {
-      const response = await fetch("http://localhost:5000/main/stat", {
-        method: "GET",
-        headers: {
-          Accept: "application/json",
-        },
-      });
+      const response = await fetch(
+        "https://funspace-server.onrender.com/main/stat",
+        {
+          method: "GET",
+          headers: {
+            Accept: "application/json",
+          },
+        }
+      );
       const data = await response.json();
       setMetrics(data);
     } catch (error) {
@@ -42,7 +48,7 @@ export const useFetch = () => {
   const profileDetails = async () => {
     try {
       const response = await fetch(
-        `http://localhost:5000/user/details/${user.user_id}`,
+        `https://funspace-server.onrender.com/user/details/${user.user_id}`,
         {
           method: "GET",
           headers: {
@@ -59,7 +65,7 @@ export const useFetch = () => {
   const profileThreads = async () => {
     try {
       const response = await fetch(
-        `http://localhost:5000/user/threads/${user.user_id}`,
+        `https://funspace-server.onrender.com/user/threads/${user.user_id}`,
         {
           method: "GET",
           headers: {
@@ -76,7 +82,7 @@ export const useFetch = () => {
   const profileComments = async () => {
     try {
       const response = await fetch(
-        `http://localhost:5000/user/comments/${user.user_id}`,
+        `https://funspace-server.onrender.com/user/comments/${user.user_id}`,
         {
           method: "GET",
           headers: {
@@ -95,7 +101,7 @@ export const useFetch = () => {
   const getThread = async (id) => {
     try {
       const response = await fetch(
-        `http://localhost:5000/view/view/thread/${id}`,
+        `https://funspace-server.onrender.com/view/view/thread/${id}`,
         {
           method: "GET",
           headers: {
@@ -112,7 +118,7 @@ export const useFetch = () => {
   const getComments = async (id) => {
     try {
       const response = await fetch(
-        `http://localhost:5000/view/view/comments/${id}`,
+        `https://funspace-server.onrender.com/view/view/comments/${id}`,
         {
           method: "GET",
           headers: {
@@ -129,12 +135,15 @@ export const useFetch = () => {
 
   const getAllThreads = async () => {
     try {
-      const response = await fetch(`http://localhost:5000/main/all`, {
-        method: "GET",
-        headers: {
-          Accept: "application/json",
-        },
-      });
+      const response = await fetch(
+        `https://funspace-server.onrender.com/main/all`,
+        {
+          method: "GET",
+          headers: {
+            Accept: "application/json",
+          },
+        }
+      );
       const data = await response.json();
       return data;
     } catch (error) {
@@ -143,14 +152,17 @@ export const useFetch = () => {
   };
   const getSearch = async (search) => {
     try {
-      const response = await fetch(`http://localhost:5000/main/search`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
-        body: JSON.stringify({ search }),
-      });
+      const response = await fetch(
+        `https://funspace-server.onrender.com/main/search`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+          },
+          body: JSON.stringify({ search }),
+        }
+      );
       const data = await response.json();
       return data;
     } catch (error) {
