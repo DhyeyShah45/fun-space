@@ -8,7 +8,7 @@ import {
 } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import AddThread from "./pages/AddThread";
-import Dashboard from "./pages/Dashboard";
+import Dashboard from "./pages/dashboard";
 import Homepage from "./pages/Homepage";
 import MainContentView from "./pages/MainContentView";
 import View from "./pages/View";
