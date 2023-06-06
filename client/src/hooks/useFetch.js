@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useUserContext } from "../userContext";
 export const useFetch = () => {
   const { user } = useUserContext();
+
   const [top5thread, setTop5Thread] = useState({});
   const [metrics, setMetrics] = useState();
   const [profMetrics, setProfMetric] = useState();
@@ -9,7 +10,7 @@ export const useFetch = () => {
   const [profComments, setProfComments] = useState({});
   const [mainThread, setMainThread] = useState({});
   const [comments, setComments] = useState([]);
-  const [allThreads, setAllThreads] = useState([]);
+
   const top5 = async () => {
     try {
       const response = await fetch("http://localhost:5000/main/top5", {
@@ -125,6 +126,7 @@ export const useFetch = () => {
       console.error(error);
     }
   };
+
   const getAllThreads = async () => {
     try {
       const response = await fetch(`http://localhost:5000/main/all`, {
@@ -134,7 +136,7 @@ export const useFetch = () => {
         },
       });
       const data = await response.json();
-      setAllThreads(data);
+      return data;
     } catch (error) {
       console.error(error);
     }
@@ -144,12 +146,13 @@ export const useFetch = () => {
       const response = await fetch(`http://localhost:5000/main/search`, {
         method: "POST",
         headers: {
+          "Content-Type": "application/json",
           Accept: "application/json",
         },
         body: JSON.stringify({ search }),
       });
       const data = await response.json();
-      setAllThreads(data);
+      return data;
     } catch (error) {
       console.error(error);
     }
@@ -161,7 +164,6 @@ export const useFetch = () => {
     stat,
     metrics,
     getAllThreads,
-    allThreads,
     getSearch,
     profileDetails,
     profMetrics,

@@ -1,13 +1,11 @@
 import { Box, Button } from "@mui/material";
 import { useEffect, useState } from "react";
 import ListContent from "../components/ListContent";
-import { useFetch } from "../hooks/useFetch";
 
-const View = () => {
-  const { allThreads, getAllThreads } = useFetch();
+const View = ({ allThreads }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [dataThreads, setDataThreads] = useState([]);
-  const itemsPerPage = 5; // Number of items to display per page
+  const itemsPerPage = 3; // Number of items to display per page
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
 
@@ -24,10 +22,6 @@ const View = () => {
       setCurrentPage(currentPage - 1);
     }
   };
-  useEffect(() => {
-    getAllThreads();
-    // setDataThreads(allThreads.slice(startIndex, endIndex));
-  }, []);
 
   useEffect(() => {
     setDataThreads(allThreads.slice(startIndex, endIndex));

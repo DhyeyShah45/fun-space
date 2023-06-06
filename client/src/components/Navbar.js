@@ -51,15 +51,16 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-const Navbar = () => {
+const Navbar = ({ setAllThreads }) => {
   const { login } = useLogin();
   const { user, setUser } = useUserContext();
   const { getAllThreads, getSearch } = useFetch();
   const [search, setSearch] = useState("");
   const navigate = useNavigate();
 
-  const handleViewAll = () => {
-    getAllThreads();
+  const handleViewAll = async () => {
+    const value = await getAllThreads();
+    setAllThreads(value);
     setTimeout(() => {
       navigate("/view/all");
     }, 1000);
@@ -88,9 +89,10 @@ const Navbar = () => {
     });
   }, [user.isLoggedIn]);
 
-  const handleEnter = (event) => {
+  const handleEnter = async (event) => {
     if (event.key === "Enter") {
-      getSearch();
+      const value = await getSearch(search);
+      setAllThreads(value);
     }
   };
 
@@ -117,7 +119,6 @@ const Navbar = () => {
           onKeyDown={handleEnter}
         />
       </Search>
-      {console.log(search)}
       <div className="links">
         <Button
           variant="contained"

@@ -42,8 +42,9 @@ const getAllThreads = async (req, res) => {
 const getSearch = async (req, res) => {
   try {
     const search = req.body.search;
+
     const keywords = search.split(" ");
-    console.log(keywords);
+
     const conditions = [];
 
     // Build the conditions for each keyword
@@ -59,7 +60,7 @@ const getSearch = async (req, res) => {
       res.json(response.rows);
     } else {
       res.json({
-        message: "Either not found or use only commas to separate the keywords",
+        message: "Either not found or use only space to separate the keywords",
       });
     }
   } catch (error) {

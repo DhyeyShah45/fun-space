@@ -1,4 +1,5 @@
 import { ThemeProvider, createTheme } from "@mui/material";
+import { useState } from "react";
 import {
   Navigate,
   Route,
@@ -15,6 +16,7 @@ import { useUserContext } from "./userContext";
 
 function App() {
   const { user } = useUserContext();
+  const [allThreads, setAllThreads] = useState([]);
   const theme = createTheme({
     palette: {
       primary: {
@@ -25,7 +27,7 @@ function App() {
   return (
     <Router>
       <ThemeProvider theme={theme}>
-        <Navbar />
+        <Navbar allThreads={allThreads} setAllThreads={setAllThreads} />
         <Routes>
           <Route exact path="/" element={<Homepage />} />
           <Route
@@ -43,7 +45,11 @@ function App() {
             }
           />
           <Route exact path="/view/thread/:id" element={<MainContentView />} />
-          <Route exact path="/view/all" element={<View />} />
+          <Route
+            exact
+            path="/view/all"
+            element={<View allThreads={allThreads} />}
+          />
         </Routes>
       </ThemeProvider>
     </Router>
