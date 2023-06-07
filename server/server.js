@@ -11,7 +11,7 @@ const app = express();
 // Middleware
 app.use(
   cors({
-    origin: "https://yay-script.netlify.app",
+    origin: process.env.ORIGIN,
   })
 );
 app.use(express.urlencoded({ extended: true }));
