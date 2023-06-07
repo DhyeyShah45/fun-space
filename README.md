@@ -1,4 +1,4 @@
-# Space Project
+# Space Project [![Netlify Status](https://api.netlify.com/api/v1/badges/e5e85143-b82c-4fde-9113-7f653f299576/deploy-status)](https://yay-script.netlify.app)
 
 Space Project is a web application that provides a shared chat or discussion space, allowing users to create issues or discussions and submit their views. It offers both public and shared issues, where users can engage in conversations within specified groups.
 
