@@ -49,12 +49,16 @@ const getSearch = async (req, res) => {
 
     // Build the conditions for each keyword
     keywords.forEach((keyword) => {
+      conditions.push(`u.user_name ILIKE '%${keyword}%'`);
       conditions.push(`thread_description ILIKE '%${keyword}%'`);
+      conditions.push(`thread_title ILIKE '%${keyword}%'`);
       conditions.push(`array_to_string(thread_tags, ',') ILIKE '%${keyword}%'`);
     });
 
     // Construct the final SQL query
-    const query = `SELECT * FROM threads WHERE ${conditions.join(" OR ")};`;
+    const query = `SELECT t.* FROM threads t JOIN users u ON t.thread_author = u.user_id WHERE ${conditions.join(
+      " OR "
+    )};`;
     const response = await pool.query(query);
     if (response.rows.length !== 0) {
       res.json(response.rows);
