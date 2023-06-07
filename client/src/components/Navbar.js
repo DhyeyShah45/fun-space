@@ -78,8 +78,7 @@ const Navbar = ({ setAllThreads }) => {
     };
     /* global google */
     google.accounts.id.initialize({
-      client_id:
-        "711055178299-5k26umqpiqfkndjghnfhsn40ioledr2p.apps.googleusercontent.com",
+      client_id: process.env.GOOGLE_CLIENT_ID,
       callback: handleCallbackResponse,
     });
 
