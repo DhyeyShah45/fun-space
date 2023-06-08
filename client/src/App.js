@@ -1,5 +1,6 @@
 import { ThemeProvider, createTheme } from "@mui/material";
 import { useState } from "react";
+import { Toaster } from "react-hot-toast";
 import {
   Navigate,
   Route,
@@ -8,10 +9,11 @@ import {
 } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import AddThread from "./pages/AddThread";
-import Dashboard from "./pages/dashboard";
 import Homepage from "./pages/Homepage";
 import MainContentView from "./pages/MainContentView";
+import PageNotFound from "./pages/PageNotFound";
 import View from "./pages/View";
+import Dashboard from "./pages/dashboard";
 import { useUserContext } from "./userContext";
 
 function App() {
@@ -26,6 +28,16 @@ function App() {
   });
   return (
     <Router>
+      <Toaster
+        position="top-center"
+        toastOptions={{
+          duration: 5000,
+          style: {
+            background: "#eee",
+            color: "#000",
+          },
+        }}
+      />
       <ThemeProvider theme={theme}>
         <Navbar setAllThreads={setAllThreads} />
         <Routes>
@@ -50,6 +62,7 @@ function App() {
             path="/view/all"
             element={<View allThreads={allThreads} />}
           />
+          <Route path="*" element={<PageNotFound />} />
         </Routes>
       </ThemeProvider>
     </Router>

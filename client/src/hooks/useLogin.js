@@ -1,3 +1,4 @@
+import toast from "react-hot-toast";
 import { useUserContext } from "../userContext";
 export const useLogin = () => {
   const { user, setUser } = useUserContext();
@@ -15,6 +16,7 @@ export const useLogin = () => {
         }
       );
       const data = await response.json();
+      toast.success("Logged In");
       setUser({ ...user, ...data[0], isLoggedIn: true, image: picture });
     } catch (error) {
       console.error(error);

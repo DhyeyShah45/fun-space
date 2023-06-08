@@ -1,3 +1,4 @@
+import toast from "react-hot-toast";
 import { useUserContext } from "../userContext";
 
 export const useAction = () => {
@@ -16,7 +17,7 @@ export const useAction = () => {
       }
     );
     const data = await respomse.json();
-    console.log(data.message);
+    toast.success(data.message);
   };
   const postComment = async (description, uid, tid) => {
     try {
@@ -32,7 +33,7 @@ export const useAction = () => {
         }
       );
       const data = await response.json();
-      console.log(data.message);
+      toast.success(data.message);
     } catch (error) {
       console.error(error);
     }
@@ -64,7 +65,7 @@ export const useAction = () => {
         }
       );
       const data = await response.json();
-      console.log(data.message);
+      toast.success(data.message);
     } catch (error) {
       console.error(error);
     }
@@ -82,7 +83,7 @@ export const useAction = () => {
         }
       );
       const data = await response.json();
-      console.log(data.message);
+      toast.success(data.message);
     } catch (error) {
       console.error(error);
     }
@@ -100,7 +101,7 @@ export const useAction = () => {
         }
       );
       const data = await response.json();
-      console.log(data.message);
+      toast.success(data.message);
     } catch (error) {
       console.error(error);
     }
@@ -118,7 +119,7 @@ export const useAction = () => {
         }
       );
       const data = await response.json();
-      console.log(data.message);
+      toast.success(data.message);
     } catch (error) {
       console.error(error);
     }
@@ -137,7 +138,11 @@ export const useAction = () => {
         }
       );
       const data = await respomse.json();
-      console.log(data.message);
+      if (respomse.status === 200) {
+        toast.success(data.message);
+      } else {
+        toast.error(data.message);
+      }
     } catch (error) {
       console.error(error);
     }
@@ -151,7 +156,7 @@ export const useAction = () => {
         }
       );
       const data = await respomse.json();
-      console.log(data.message);
+      toast.success(data.message);
     } catch (error) {
       console.error(error);
     }

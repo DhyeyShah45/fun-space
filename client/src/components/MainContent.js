@@ -22,7 +22,7 @@ import { useUserContext } from "../userContext";
 const MainContent = ({ data, hasChanged, setHasChanged }) => {
   const navigate = useNavigate();
   const { user } = useUserContext();
-  const ok = Object.keys(data).length !== 0;
+  const ok = Object.keys(data).length !== 0 && data.message === undefined;
   const { postLikeThread, postDislikeThread, delThread, putThread } =
     useAction();
   const [open, setOpen] = useState(false);
@@ -60,8 +60,6 @@ const MainContent = ({ data, hasChanged, setHasChanged }) => {
     setOpen(true);
   };
   const handleEdit = () => {
-    console.log(title, description, tags);
-
     putThread(
       title,
       description,

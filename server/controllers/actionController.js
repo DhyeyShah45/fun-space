@@ -38,7 +38,7 @@ const postLikeThread = async (req, res) => {
     //   [uid, tid]
     // );
 
-    res.json({ r1: response1.rows, r2: response2.rows });
+    res.json({ message: "Thread Liked!" });
   } catch (error) {
     console.error();
     res.status(500).json({ error: error.message });
@@ -63,7 +63,7 @@ const postDislikeThread = async (req, res) => {
   `,
       [uid, tid]
     );
-    res.json({ r1: response1.rows, r2: response2.rows });
+    res.json({ message: "Thread Disliked" });
   } catch (error) {
     console.error();
     res.status(500).json({ error: error.message });
@@ -88,7 +88,7 @@ const postDislikeComment = async (req, res) => {
   `,
       [uid, tid]
     );
-    res.json({ r1: response1.rows, r2: response2.rows });
+    res.json({ message: "Comment Disliked" });
   } catch (error) {
     console.error();
     res.status(500).json({ error: error.message });
@@ -113,7 +113,7 @@ WHERE comment_id = $2 AND ($1 = ANY(comment_dislikedBy));
 `,
       [uid, tid]
     );
-    res.json({ r1: response1.rows, r2: response2.rows });
+    res.json({ message: "Comment Liked" });
   } catch (error) {
     console.error();
     res.status(500).json({ error: error.message });

@@ -49,7 +49,7 @@ const View = ({ allThreads }) => {
         <Button
           variant="outlined"
           onClick={nextPage}
-          disabled={currentPage === totalPages}
+          disabled={currentPage === totalPages || totalPages === 0}
         >
           Next
         </Button>
