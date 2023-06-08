@@ -17,7 +17,7 @@ const ProfileStat = ({ data }) => {
   const handleDelete = async () => {
     try {
       const response = await fetch(
-        `${process.env.REACT_BASE_URL}/user/del/${user.user_id}`,
+        `${process.env.REACT_APP_BASE_URL}/user/del/${user.user_id}`,
         {
           method: "DELETE",
           headers: {

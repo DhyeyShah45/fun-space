@@ -5,7 +5,7 @@ export const useAction = () => {
 
   const postThread = async (title, description, tags) => {
     const respomse = await fetch(
-      `${process.env.REACT_BASE_URL}/view/add/thread/${user.user_id}`,
+      `${process.env.REACT_APP_BASE_URL}/view/add/thread/${user.user_id}`,
       {
         method: "POST",
         headers: {
@@ -21,7 +21,7 @@ export const useAction = () => {
   const postComment = async (description, uid, tid) => {
     try {
       const response = await fetch(
-        `${process.env.REACT_BASE_URL}/view/add/comment/${uid}/${tid}`,
+        `${process.env.REACT_APP_BASE_URL}/view/add/comment/${uid}/${tid}`,
         {
           method: "POST",
           headers: {
@@ -40,7 +40,7 @@ export const useAction = () => {
   const delComment = async (id) => {
     try {
       const respomse = await fetch(
-        `${process.env.REACT_BASE_URL}/view/delete/comment/${id}`,
+        `${process.env.REACT_APP_BASE_URL}/view/delete/comment/${id}`,
         {
           method: "DELETE",
         }
@@ -54,7 +54,7 @@ export const useAction = () => {
   const postLikeThread = async (uid, tid) => {
     try {
       const response = await fetch(
-        `${process.env.REACT_BASE_URL}/action/like/thread/${uid}/${tid}`,
+        `${process.env.REACT_APP_BASE_URL}/action/like/thread/${uid}/${tid}`,
         {
           method: "POST",
           headers: {
@@ -72,7 +72,7 @@ export const useAction = () => {
   const postDislikeThread = async (uid, tid) => {
     try {
       const response = await fetch(
-        `${process.env.REACT_BASE_URL}/action/dislike/thread/${uid}/${tid}`,
+        `${process.env.REACT_APP_BASE_URL}/action/dislike/thread/${uid}/${tid}`,
         {
           method: "POST",
           headers: {
@@ -90,7 +90,7 @@ export const useAction = () => {
   const postLikeComment = async (uid, tid) => {
     try {
       const response = await fetch(
-        `${process.env.REACT_BASE_URL}/action/like/comment/${uid}/${tid}`,
+        `${process.env.REACT_APP_BASE_URL}/action/like/comment/${uid}/${tid}`,
         {
           method: "POST",
           headers: {
@@ -108,7 +108,7 @@ export const useAction = () => {
   const postDislikeComment = async (uid, tid) => {
     try {
       const response = await fetch(
-        `${process.env.REACT_BASE_URL}/action/dislike/comment/${uid}/${tid}`,
+        `${process.env.REACT_APP_BASE_URL}/action/dislike/comment/${uid}/${tid}`,
         {
           method: "POST",
           headers: {
@@ -126,7 +126,7 @@ export const useAction = () => {
   const putThread = async (title, description, tags, uid, tid) => {
     try {
       const respomse = await fetch(
-        `${process.env.REACT_BASE_URL}/view/update/thread/${uid}/${tid}`,
+        `${process.env.REACT_APP_BASE_URL}/view/update/thread/${uid}/${tid}`,
         {
           method: "PUT",
           headers: {
@@ -145,7 +145,7 @@ export const useAction = () => {
   const delThread = async (id) => {
     try {
       const respomse = await fetch(
-        `${process.env.REACT_BASE_URL}/view/delete/thread/${id}`,
+        `${process.env.REACT_APP_BASE_URL}/view/delete/thread/${id}`,
         {
           method: "DELETE",
         }
