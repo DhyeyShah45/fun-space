@@ -1,8 +1,11 @@
 import { useState } from "react";
+import { toast } from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 import { useUserContext } from "../userContext";
+
 export const useFetch = () => {
   const { user } = useUserContext();
-
+  const navigate = useNavigate();
   const [top5thread, setTop5Thread] = useState({});
   const [metrics, setMetrics] = useState();
   const [profMetrics, setProfMetric] = useState();
@@ -110,7 +113,12 @@ export const useFetch = () => {
         }
       );
       const data = await response.json();
-      setMainThread(data);
+      if (response.status === 404) {
+        toast.error(data.message);
+        navigate("/");
+      } else {
+        setMainThread(data);
+      }
     } catch (error) {
       console.error(error);
     }
@@ -164,7 +172,13 @@ export const useFetch = () => {
         }
       );
       const data = await response.json();
-      return data;
+      if (data.message) {
+        toast.error(data.message);
+        return [];
+      } else {
+        toast.success(`${data.length} results found!`);
+        return data;
+      }
     } catch (error) {
       console.error(error);
     }

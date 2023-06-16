@@ -7,6 +7,7 @@ import {
   Typography,
   useTheme,
 } from "@mui/material";
+import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import { useUserContext } from "../userContext";
 
@@ -26,7 +27,7 @@ const ProfileStat = ({ data }) => {
         }
       );
       const data = await response.json();
-      console.log(data.message);
+      toast.success(data.message);
       navigate("/");
       setUser({ ...user, isLoggedIn: false });
     } catch (error) {

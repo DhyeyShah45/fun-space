@@ -5,6 +5,7 @@ import Typography from "@mui/material/Typography";
 import { alpha, styled } from "@mui/material/styles";
 import jwt_decode from "jwt-decode";
 import { useEffect, useState } from "react";
+import { toast } from "react-hot-toast";
 import { Link, useNavigate } from "react-router-dom";
 import { useFetch } from "../hooks/useFetch";
 import { useLogin } from "../hooks/useLogin";
@@ -67,6 +68,7 @@ const Navbar = ({ setAllThreads }) => {
   };
 
   const handleSignOut = () => {
+    toast.success("Signed Out Successfully");
     setUser({ ...user, isLoggedIn: false });
   };
 
@@ -91,6 +93,7 @@ const Navbar = ({ setAllThreads }) => {
   const handleEnter = async (event) => {
     if (event.key === "Enter") {
       const value = await getSearch(search);
+
       setAllThreads(value);
       setTimeout(() => {
         setSearch("");

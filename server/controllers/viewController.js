@@ -10,7 +10,7 @@ const postThread = async (req, res) => {
     VALUES ($1,$2,$3,$4);`,
       [title, description, tags, uid]
     );
-    res.json(response.rows);
+    res.json({ message: "Post Created" });
   } catch (error) {
     console.error();
     res.status(500).json({ message: error.message });
@@ -58,9 +58,11 @@ const putThread = async (req, res) => {
         [title, description, tags, tid]
       );
       // console.log(response);
-      res.json(response.rows);
+      res.status(200).json({ message: "Post edited" });
     } else {
-      res.json({ message: "You can't edit because you're not the owner!" });
+      res
+        .status(403)
+        .json({ message: "You can't edit because you're not the owner!" });
     }
   } catch (error) {
     console.error();
@@ -74,7 +76,7 @@ const delThread = async (req, res) => {
       `DELETE FROM threads WHERE thread_id = $1`,
       [tid]
     );
-    res.json(response.rows);
+    res.json({ message: "Thread Deleted" });
   } catch (error) {
     console.error();
     res.status(500).json({ message: error.mesage });
@@ -96,15 +98,23 @@ const delComment = async (req, res) => {
 const getThread = async (req, res) => {
   try {
     const tid = req.params.tid;
-    const response = await pool.query(
-      `SELECT t.*, u.user_name
-    FROM threads AS t
-    INNER JOIN users AS u ON t.thread_author = u.user_id
-    WHERE t.thread_id = $1;
-    `,
+    const check = await pool.query(
+      `SELECT EXISTS (SELECT 1 FROM threads where thread_id = $1) AS present;`,
       [tid]
     );
-    res.json(response.rows[0]);
+    if (check.rows[0].present) {
+      const response = await pool.query(
+        `SELECT t.*, u.user_name
+      FROM threads AS t
+      INNER JOIN users AS u ON t.thread_author = u.user_id
+      WHERE t.thread_id = $1;
+      `,
+        [tid]
+      );
+      res.json(response.rows[0]);
+    } else {
+      res.status(404).json({ message: "No such thread found!" });
+    }
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: error.mesage });
@@ -132,7 +142,6 @@ module.exports = {
   postThread,
   postComment,
   putThread,
-
   delThread,
   delComment,
   getThread,
